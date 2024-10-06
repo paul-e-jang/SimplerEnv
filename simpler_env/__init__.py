@@ -35,21 +35,21 @@ ENVIRONMENTS = [
 ENVIRONMENT_MAP = {
     "google_robot_pick_coke_can": ("GraspSingleOpenedCokeCanInScene-v0", {}),
     "google_robot_pick_coke_can_512_640": ("GraspSingleOpenedCokeCanInScene-v0", {
-        'camera_cfg': {
-            'width': 640,
-            'height': 512
+        "camera_cfg": {
+            'height': 512,
+            'width': 640
         }
     }),
     "google_robot_pick_coke_can_256_320": ("GraspSingleOpenedCokeCanInScene-v0", {
-        'camera_cfg': {
-            'width': 320,
-            'height': 256
+        "camera_cfg": {
+            'height': 256,
+            'width': 320
         }
     }),
     "google_robot_pick_coke_can_128_160": ("GraspSingleOpenedCokeCanInScene-v0", {
-        'camera_cfg': {
-            'width': 160,
-            'height': 128
+        "camera_cfg": {
+            'height': 128,
+            'width': 160
         }
     }),
     "google_robot_pick_horizontal_coke_can": (
