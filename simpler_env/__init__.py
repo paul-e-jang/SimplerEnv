@@ -3,6 +3,9 @@ import mani_skill2_real2sim.envs
 
 ENVIRONMENTS = [
     "google_robot_pick_coke_can",
+    "google_robot_pick_coke_can_512_640",
+    "google_robot_pick_coke_can_256_320",
+    "google_robot_pick_coke_can_128_160",
     "google_robot_pick_horizontal_coke_can",
     "google_robot_pick_vertical_coke_can",
     "google_robot_pick_standing_coke_can",
@@ -31,6 +34,24 @@ ENVIRONMENTS = [
 
 ENVIRONMENT_MAP = {
     "google_robot_pick_coke_can": ("GraspSingleOpenedCokeCanInScene-v0", {}),
+    "google_robot_pick_coke_can_512_640": ("GraspSingleOpenedCokeCanInScene-v0", {
+        "camera_cfg": {
+            'height': 512,
+            'width': 640
+        }
+    }),
+    "google_robot_pick_coke_can_256_320": ("GraspSingleOpenedCokeCanInScene-v0", {
+        "camera_cfg": {
+            'height': 256,
+            'width': 320
+        }
+    }),
+    "google_robot_pick_coke_can_128_160": ("GraspSingleOpenedCokeCanInScene-v0", {
+        "camera_cfg": {
+            'height': 128,
+            'width': 160
+        }
+    }),
     "google_robot_pick_horizontal_coke_can": (
         "GraspSingleOpenedCokeCanInScene-v0",
         {"lr_switch": True},
