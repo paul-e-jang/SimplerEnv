@@ -91,7 +91,7 @@ ENVIRONMENT_MAP = {
 }
 
 
-def make(task_name, camera_cfg):
+def make(task_name):
     """Creates simulated eval environment from task name."""
     assert task_name in ENVIRONMENTS, f"Task {task_name} is not supported. Environments: \n {ENVIRONMENTS}"
     env_name, kwargs = ENVIRONMENT_MAP[task_name]
