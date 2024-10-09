@@ -1,5 +1,6 @@
 import gymnasium as gym
 import mani_skill2_real2sim.envs
+from mani_skill2_real2sim import ASSET_DIR
 
 ENVIRONMENTS = [
     "google_robot_pick_coke_can",
@@ -35,19 +36,19 @@ ENVIRONMENTS = [
 ENVIRONMENT_MAP = {
     "google_robot_pick_coke_can": ("GraspSingleOpenedCokeCanInScene-v0", {}),
     "google_robot_pick_coke_can_512_640": ("GraspSingleOpenedCokeCanInScene-v0", {
-        "camera_cfg": {
+        "camera_cfgs": {
             'height': 512,
             'width': 640
         }
     }),
     "google_robot_pick_coke_can_256_320": ("GraspSingleOpenedCokeCanInScene-v0", {
-        "camera_cfg": {
+        "camera_cfgs": {
             'height': 256,
             'width': 320
         }
     }),
     "google_robot_pick_coke_can_128_160": ("GraspSingleOpenedCokeCanInScene-v0", {
-        "camera_cfg": {
+        "camera_cfgs": {
             'height': 128,
             'width': 160
         }
@@ -91,10 +92,28 @@ ENVIRONMENT_MAP = {
 }
 
 
-def make(task_name):
+def make(task_name,
+        camera_cfgs=None):
     """Creates simulated eval environment from task name."""
     assert task_name in ENVIRONMENTS, f"Task {task_name} is not supported. Environments: \n {ENVIRONMENTS}"
     env_name, kwargs = ENVIRONMENT_MAP[task_name]
-    kwargs["prepackaged_config"] = True
+    kwargs["prepackaged_config"] = False
+    prepackaged_camera_config = {'add_segmentation': True}
+    if camera_cfgs is not None:
+        prepackaged_camera_config.update(camera_cfgs)
+
+    kwargs.update(
+        {'robot': 'google_robot_static',
+         'control_freq': 3,
+         'sim_freq': 513,
+         'control_mode': 'arm_pd_ee_delta_pose_align_interpolate_by_planner_gripper_pd_joint_target_delta_pos_interpolate_by_planner',
+         'scene_name': 'google_pick_coke_can_1_v4',
+         'camera_cfgs': prepackaged_camera_config,
+         'rgb_overlay_path': str(
+            ASSET_DIR / "real_inpainting/google_coke_can_real_eval_1.png"
+        ),
+         'rgb_overlay_cameras': ['overhead_camera']
+         })
+
     env = gym.make(env_name, obs_mode="rgbd", **kwargs)
     return env
